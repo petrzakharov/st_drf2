@@ -7,7 +7,7 @@ from items.models import Item
 
 class Command(BaseCommand):
     URL = 'https://raw.githubusercontent.com/stepik-a-w/drf-project-boxes/master/foodboxes.json'
-    SAVE_IMAGE_PATH = 'media/pictures/'
+    SAVE_IMAGE_PATH = 'pictures/'
 
     @staticmethod
     def download_images(url, path):

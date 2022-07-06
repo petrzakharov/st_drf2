@@ -6,7 +6,7 @@ from conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1', include('items.urls')),
+    path('api/v1/', include('items.urls')),
 ]
 
 if settings.DEBUG:
