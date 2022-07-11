@@ -16,3 +16,6 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='cart_items', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     price = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def total_price(self):
+        return int(self.quantity) * int(self.price)
