@@ -14,7 +14,6 @@ class CartsSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ('id', 'item', 'item_id', 'quantity', 'price', 'total_price')
-        # read_only_fields = ('item', 'price', 'total_price',)
 
 
 class CartTotalSerializer(serializers.ModelSerializer):
@@ -52,6 +51,12 @@ class CartItemSerializer(serializers.ModelSerializer):
             },
         )
         return cart_item
+
+    def update(self, instance, validated_data):
+        instance.price = instance.item.price
+        instance.quantity = validated_data['quantity']
+        instance.save()
+        return instance
 
     def get_total_price(self, obj):
         return obj.price * obj.quantity

@@ -7,6 +7,5 @@ router = DefaultRouter()
 router.register('items', ItemViewSet, basename='item')
 
 urlpatterns = [
-    # path('items/<int:pk>/', item, name='one_item'),
     path('', include(router.urls))
 ]

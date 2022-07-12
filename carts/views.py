@@ -1,7 +1,7 @@
 from rest_framework.permissions import IsAuthenticated
 from carts.models import Cart, CartItem
-from rest_framework import viewsets, mixins
-from rest_framework.viewsets import ModelViewSet
+from rest_framework import viewsets, mixins, status
+from rest_framework.viewsets import ModelViewSet, ViewSet
 from django.db.models import Sum, F
 from rest_framework.response import Response
 from items.models import Item
@@ -29,20 +29,6 @@ class CartItemModelViewSet(ModelViewSet):
         return CartItem.objects.filter(cart__users=self.request.user)
 
     def get_serializer_class(self):
-        if self.action == 'create':
+        if self.action in ('create', 'update', 'partial_update'):
             return CartItemSerializer
         return CartsSerializer
-
-    # def update(self, request, *args, **kwargs):
-    #     kwargs['pk'] айдишник CartItem
-
-    #     instance = CartItem.objects.get(
-    #         cart__user=request.user,
-    #         item=Item.objects.get(pk=request.data['item'])
-    #     )
-    #     print(instance)
-    #     data = {'quantity': request.data['quantity']}
-    #     serializer = self.get_serializer_class()(instance, data=data, partial=True)
-    #     serializer.is_valid(raise_exception=True)
-    #     serializer.save()
-    #     return Response(serializer.data)
