@@ -1,10 +1,8 @@
 from rest_framework.permissions import IsAuthenticated
 from carts.models import Cart, CartItem
-from rest_framework import viewsets, mixins, status
-from rest_framework.viewsets import ModelViewSet, ViewSet
+from rest_framework import viewsets, mixins
+from rest_framework.viewsets import ModelViewSet
 from django.db.models import Sum, F
-from rest_framework.response import Response
-from items.models import Item
 from .serializers import CartsSerializer, CartTotalSerializer, CartItemSerializer
 
 

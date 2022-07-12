@@ -2,7 +2,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from users.models import User
 from users.serializers import RegisterSerializer
 from rest_framework import generics, status
-from rest_framework.viewsets import ViewSet, ModelViewSet
+from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 
 

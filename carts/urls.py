@@ -10,5 +10,4 @@ router.register('carts/items', CartItemModelViewSet, basename='carts-item')
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('cart/', include(router2.urls)),
 ]

@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.urls import path, include
-# from rest_framework.authtoken.views import obtain_auth_token
 from conf import settings
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -23,7 +22,6 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api-token-auth/', views.obtain_auth_token),
     path('api/v1/', include('items.urls')),
     path('api/v1/', include('carts.urls')),
     path('api/v1/', include('users.urls')),

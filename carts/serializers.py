@@ -2,9 +2,7 @@ from rest_framework import serializers
 from carts.models import CartItem, Cart
 from rest_framework.fields import SerializerMethodField
 
-from items.models import Item
 from items.serializers import ItemSerializer
-from django.shortcuts import get_object_or_404
 
 
 class CartsSerializer(serializers.ModelSerializer):
