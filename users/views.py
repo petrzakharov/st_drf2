@@ -1,14 +1,14 @@
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.viewsets import ViewSet
+
 from users.models import User
 from users.serializers import RegisterSerializer
-from rest_framework import generics, status
-from rest_framework.viewsets import ViewSet
-from rest_framework.response import Response
 
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer
 
 
@@ -23,6 +23,7 @@ class CurrentUserView(ViewSet):
         user = self.get_queryset()
         serializer = RegisterSerializer(user)
         serialized_data = serializer.data
+        del serialized_data['password']
         serialized_data['username'] = user.username
         serialized_data['id'] = user.id
         return Response(data=serialized_data, status=status.HTTP_200_OK)

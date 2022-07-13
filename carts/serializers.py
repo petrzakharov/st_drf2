@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from carts.models import CartItem, Cart
 from rest_framework.fields import SerializerMethodField
 
+from carts.models import Cart, CartItem
 from items.serializers import ItemSerializer
 
 
@@ -20,7 +20,7 @@ class CartTotalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ('items', 'total_cost',)
+        fields = ('id', 'items', 'total_cost',)
 
     def get_total_cost(self, obj):
         return self.context['total_cost']

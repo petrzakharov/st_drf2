@@ -1,7 +1,8 @@
-from rest_framework import serializers
-from users.models import User
-from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
+
+from users.models import User
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -10,7 +11,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         validators=[UniqueValidator(queryset=User.objects.all())]
     )
 
-    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    password = serializers.CharField(write_only=False, required=True, validators=[validate_password])
 
     class Meta:
         model = User
@@ -36,4 +37,3 @@ class RegisterSerializer(serializers.ModelSerializer):
         instance.username = validated_data['email'].split('@')[0]
         instance.save()
         return super().update(instance, validated_data)
-
