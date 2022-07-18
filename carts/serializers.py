@@ -23,7 +23,10 @@ class CartTotalSerializer(serializers.ModelSerializer):
         fields = ('id', 'items', 'total_cost',)
 
     def get_total_cost(self, obj):
-        return self.context['total_cost']
+        return obj.total_cost()
+
+        # удалить из вьюхи расчет total_cost
+        # удалить из вьюх и сериализаторов все расчеты total_cost и total_price, теперь считаем это на уровне модели
 
 
 class CartItemSerializer(serializers.ModelSerializer):

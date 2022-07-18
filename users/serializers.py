@@ -37,3 +37,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         instance.username = validated_data['email'].split('@')[0]
         instance.save()
         return super().update(instance, validated_data)
+
+
+class UserSerializer(RegisterSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'address')

@@ -24,6 +24,7 @@ class CartsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
                 total_price=Sum(F('quantity') * F('price'))
             ).aggregate(total_cost=Sum('total_price'))['total_cost']
             return context
+        # удалить!! Добавил новый метод в модель Cart
 
 
 class CartItemModelViewSet(ModelViewSet):
