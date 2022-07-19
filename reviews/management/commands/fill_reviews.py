@@ -1,5 +1,7 @@
-from django.core.management.base import BaseCommand, CommandError
 import requests
+
+from django.core.management.base import BaseCommand, CommandError
+
 from reviews.models import Review
 from users.models import User
 
@@ -18,7 +20,7 @@ class Command(BaseCommand):
             result = response.json()
             for item in result:
                 user = User.objects.get(pk=item['author'])
-                Reviews.objects.create(
+                Review.objects.create(
                     author=user,
                     text=item['content'],
                     created_at=item['created_at'],

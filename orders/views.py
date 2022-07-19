@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from orders.models import Order
 from orders.permissions import OnlyAuthorCanEditObject
-from orders.serializers import OrderSerializer, OrderDetailSerializer
+from orders.serializers import OrderDetailSerializer, OrderSerializer
 
 
 class OrderViewSet(ModelViewSet):

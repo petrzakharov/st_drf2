@@ -1,7 +1,9 @@
 import shutil
 
-from django.core.management.base import BaseCommand, CommandError
 import requests
+
+from django.core.management.base import BaseCommand, CommandError
+
 from items.models import Item
 
 

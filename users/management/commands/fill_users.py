@@ -1,5 +1,7 @@
-from django.core.management.base import BaseCommand, CommandError
 import requests
+
+from django.core.management.base import BaseCommand, CommandError
+
 from users.models import User
 
 

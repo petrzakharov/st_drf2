@@ -3,9 +3,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from carts.models import Cart, CartItem
+
 from .permissions import OnlyCartWithoutOrderIsEditable
-from .serializers import (CartItemSerializer, CartsSerializer,
-                          CartTotalSerializer)
+from .serializers import (
+    CartItemSerializer, CartsSerializer, CartTotalSerializer,
+)
 
 
 class CartsViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -31,4 +33,3 @@ class CartItemModelViewSet(ModelViewSet):
         if self.action in ('create', 'update', 'partial_update'):
             return CartItemSerializer
         return CartsSerializer
-
