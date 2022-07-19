@@ -11,9 +11,7 @@ class ReviewsViewset(generics.ListCreateAPIView):
     queryset = Review.objects.all()
 
     def get_queryset(self):
-        return Review.objects.filter(author=self.request.user)
+        return Review.objects.filter(author=self.request.user, status='P')
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-
-    #  точно ли нам нужно получать отзывы только текущего пользователя?

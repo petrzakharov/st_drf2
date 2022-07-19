@@ -22,11 +22,9 @@ class CartTotalSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ('id', 'items', 'total_cost',)
 
-    def get_total_cost(self, obj):
+    @staticmethod
+    def get_total_cost(obj):
         return obj.total_cost()
-
-        # удалить из вьюхи расчет total_cost
-        # удалить из вьюх и сериализаторов все расчеты total_cost и total_price, теперь считаем это на уровне модели
 
 
 class CartItemSerializer(serializers.ModelSerializer):
@@ -40,9 +38,15 @@ class CartItemSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         request = self.context.get('request')
         item = validated_data['item']
-        cart, _ = Cart.objects.get_or_create(
-            users=request.user,
-        )
+        try:
+            cart = Cart.objects.get(
+                users=request.user,
+                order=None
+            )
+        except Cart.DoesNotExist:
+            cart = Cart.objects.create(
+                users=request.user
+            )
         cart_item, _ = CartItem.objects.update_or_create(
             cart=cart,
             item=item,
@@ -59,5 +63,6 @@ class CartItemSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-    def get_total_price(self, obj):
-        return obj.price * obj.quantity
+    @staticmethod
+    def get_total_price(obj):
+        return obj.total_price()

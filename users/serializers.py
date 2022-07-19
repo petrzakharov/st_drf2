@@ -11,11 +11,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         validators=[UniqueValidator(queryset=User.objects.all())]
     )
 
-    password = serializers.CharField(write_only=False, required=True, validators=[validate_password])
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
 
     class Meta:
         model = User
-        fields = ('password', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'address')
+        fields = ('id', 'username', 'password', 'email', 'first_name', 'last_name', 'middle_name', 'phone', 'address')
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True},
@@ -23,6 +23,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             'phone': {'required': True},
             'address': {'required': True},
         }
+        read_only_fields = ('id', 'username',)
 
     def create(self, validated_data):
         password = validated_data.pop('password')

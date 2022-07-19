@@ -23,7 +23,6 @@ class CurrentUserView(ViewSet):
         user = self.get_queryset()
         serializer = RegisterSerializer(user)
         serialized_data = serializer.data
-        del serialized_data['password']
         serialized_data['username'] = user.username
         serialized_data['id'] = user.id
         return Response(data=serialized_data, status=status.HTTP_200_OK)

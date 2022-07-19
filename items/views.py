@@ -1,6 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins, viewsets
 from rest_framework.filters import OrderingFilter
+from rest_framework.permissions import AllowAny
 
 from .filters import ItemFilter
 from .models import Item
@@ -15,3 +16,4 @@ class ItemViewSet(mixins.ListModelMixin,
     filter_backends = [OrderingFilter, DjangoFilterBackend]
     ordering = ['title']
     filterset_class = ItemFilter
+    permission_classes = (AllowAny,)
