@@ -34,7 +34,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        instance.set_password(validated_data['password'])
+        if 'password' in validated_data:
+            instance.set_password(validated_data['password'])
         instance.username = validated_data['email'].split('@')[0]
         instance.save()
         return super().update(instance, validated_data)
