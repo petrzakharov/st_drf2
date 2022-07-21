@@ -11,7 +11,7 @@ class ReviewsViewset(generics.ListCreateAPIView):
     queryset = Review.objects.all()
 
     def get_queryset(self):
-        return Review.objects.filter(author=self.request.user, status='P')
+        return Review.objects.filter(author=self.request.user, status='P').select_related('author')
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
